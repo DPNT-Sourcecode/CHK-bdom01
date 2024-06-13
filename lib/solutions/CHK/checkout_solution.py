@@ -84,16 +84,27 @@ def checkout(skus: str) -> int:
         price = 0
         free_bs = E // 2
         paid_bs = B - free_bs
-        
         offer_bs = paid_bs // 2
         normal_bs = paid_bs % 2
-        
         price += 40 * E
         price += offer_bs * 25
         price += normal_bs * 30
         return price
     
     def b_first(B, E):
+        price = 0
+        offer_bs = B // 2
+        normal_bs = B % 2
+        potential_free_bs = E // 2
+        paid_bs = normal_bs - potential_free_bs
+        if paid_bs <0:
+            paid_bs=0
+        
+        price += 40 * E
+        price += offer_bs * 25
+        price += paid_bs * 30
+        return price
+        
        
         
         elif item == "B":    
