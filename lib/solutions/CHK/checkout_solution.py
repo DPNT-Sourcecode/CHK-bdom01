@@ -27,55 +27,22 @@ def checkout(skus: str) -> int:
             results = re.findall(pattern, special_offers)
             offer_1_items, offer_1_cost = [int(i) for i in results[0]]
             offer_2_items, offer_2_cost = [int(i) for i in results[0]]
-            
             item_count = count_items[item]
             high_offer = item_count // offer_2_items
             low_offer = (item_count % offer_2_items) // offer_1_items
-            nooffer = item_count - high_offer * 5 - low_offer * 3
-            total_price += high_offer * 200
-            total_price += low_offer * 130
-            total_price += nooffer * 50
-            
-            
-            
+            nooffer = item_count - high_offer * offer_2_items - low_offer * offer_1_items
+            total_price += high_offer * offer_2_cost
+            total_price += low_offer * offer_1_cost
+            total_price += nooffer * price
         elif special_offers.find("free")>=-1:  
-                            
-            
-            
-        
-        
-        
-        
-        
-    
-    
-    total_price = 0
-    for item in ("A", "C", "D", "F"):
-        if item=="A":
-            A = count_items["A"]
-            A_5_offer = A // 5
-            A_3_offer = (A % 5) // 3
-            A_nooffer = A - A_5_offer * 5 - A_3_offer * 3
-            total_price += A_5_offer * 200
-            total_price += A_3_offer * 130
-            total_price += A_nooffer * 50
-            
-        elif item == "C":
-            total_price += 20 * count_items["C"]
-            
-        elif item == "D":
-            total_price += 15 * count_items["D"]
-            
-        elif item == "F":
-            
-            # set of every 3 under off
-            f_offer = count_items["F"] // 3
-            
-            # however many not in three not under offer
-            f_nooffer = count_items["F"] % 3
-            total_price += f_nooffer * 10
-            print(f_offer)
-            total_price += f_offer * 10 * 2
+            if item == "F":
+                # set of every 3 under off
+                f_offer = count_items["F"] // 3
+                # however many not in three not under offer
+                f_nooffer = count_items["F"] % 3
+                total_price += f_nooffer * 10
+                print(f_offer)
+                total_price += f_offer * 10 * 2
             
     
     B = count_items["B"]
@@ -119,3 +86,4 @@ def checkout(skus: str) -> int:
     return total_price
     
     
+
