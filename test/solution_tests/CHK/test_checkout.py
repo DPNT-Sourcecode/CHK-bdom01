@@ -42,3 +42,9 @@ class TestCheckoutFunction(unittest.TestCase):
         
     def test_2Es_case(self):
         self.assertEqual(checkout_solution.checkout("EE"), 80)
+        
+    def test_2Fs_case(self):
+        self.assertEqual(checkout_solution.checkout("FF"), 20)
+        
+    def test_3Fs_case(self):
+        self.assertEqual(checkout_solution.checkout("FFF"), 20)

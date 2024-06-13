@@ -36,7 +36,7 @@ def checkout(skus: str) -> int:
             # however many not in three not under offer
             f_nooffer = count_items["F"] % 3
             total_price += f_nooffer * 10
-            total_price += f_offer * 10 * (2/3)
+            total_price += f_offer * 10 * (3/2)
             
     
     B = count_items["B"]
