@@ -1,22 +1,10 @@
 from collections import Counter
+# import pandas as pd
+
 
 def checkout(skus: str) -> int:
     
-    with open("lib\solutions\CHK\offers.txt", 'r') as file:
-        data = []
-        for i, line in enumerate(file):
-            split_line = [i.strip() for i in line.split("|")]
-            data.append(split_line)
-            
-        print(data)
-            
-            
-    
-    letters = [chr(i).upper() for i in range(97, 123)]
-    
-    get_one_free_letters = "EFNRU"
-    mutil_item_offers = "ABHKPQ"
-    
+    df = pd.read_csv(r"lib\solutions\CHK\offers.csv")
     
     if not isinstance(skus, str):
         return -1
