@@ -114,15 +114,21 @@ def checkout(skus: str) -> int:
     e_first = calc_e_first(B, E)
     b_first = calc_b_first(B, E)
     
+    print("total price", total_price)
     if e_first > b_first:
         print("e bigger")
         total_price += b_first
+    elif b_first > e_first:
+        print("b bigger")
+        print(e_first)
+        total_price += e_first
     else:
         total_price += e_first
             
     return total_price
     
     
+
 
 
 
