@@ -1,4 +1,5 @@
 from collections import Counter
+from .offers import offers
 
 def checkout(skus: str) -> int:
     
@@ -10,7 +11,8 @@ def checkout(skus: str) -> int:
     for i in item_names:
         if i not in ("A", "B", "C", "D", "E", "F"):
             return -1
-
+        
+offers = 
 
     
     total_price = 0
