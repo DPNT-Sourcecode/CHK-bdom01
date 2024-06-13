@@ -13,7 +13,6 @@ def checkout(skus):
     for i in item_names:
         if i not in ("A", "B", "C", "D"):
             return -1
-        
     
     total_price = 0
     for item in ("A", "B", "C", "D"):
@@ -22,11 +21,13 @@ def checkout(skus):
             no_offers_price = (count_items["A"] % 3) * 50
             total_price += offers_price
             total_price += no_offers_price
+            
         elif item == "B":    
             offers_price = (count_items["B"] // 2) * 45
             no_offers_price = (count_items["B"] % 2) * 30
             total_price += offers_price
             total_price += no_offers_price
+            
         elif item == "C":
             total_price += 20 * count_items["C"]
             
@@ -36,5 +37,3 @@ def checkout(skus):
     return total_price
     
     
-
-
