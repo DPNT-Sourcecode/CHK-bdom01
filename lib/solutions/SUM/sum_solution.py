@@ -13,5 +13,3 @@ def compute(x: int, y: int) -> int:
         raise ValueError(f"y={y} is not an integer between 0 - 100")
     
     return x + y
-
-
