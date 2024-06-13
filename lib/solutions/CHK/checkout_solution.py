@@ -3,7 +3,18 @@ from collections import Counter
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
+    
+    if not isinstance(skus, str):
+        # raise ValueError("skus input is not a string")
+        return -1
+    
     count_items = Counter(skus)
+    item_names = count_items.keys()
+    for i in item_names:
+        if i not in ("A", "B", "C", "D"):
+            return -1
+        
+    
     total_price = 0
     for item in ("A", "B", "C", "D"):
         if item=="A":
@@ -25,4 +36,5 @@ def checkout(skus):
     return total_price
     
     
+
 
