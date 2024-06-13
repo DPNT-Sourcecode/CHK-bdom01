@@ -81,6 +81,7 @@ def checkout(skus: str) -> int:
     B = count_items["B"]
     E = count_items["E"]
     
+    print(total_price)
     # e first:
     def calc_e_first(B, E):
         price = 0
@@ -91,6 +92,7 @@ def checkout(skus: str) -> int:
         price += 40 * E
         price += offer_bs * 25
         price += normal_bs * 30
+        print("e first price", price)
         return price
     
     def calc_b_first(B, E):
@@ -105,6 +107,7 @@ def checkout(skus: str) -> int:
         price += 40 * E
         price += offer_bs * 25
         price += paid_bs * 30
+        print("b first price", price)
         return price
     
     e_first = calc_e_first(B, E)
@@ -118,4 +121,5 @@ def checkout(skus: str) -> int:
     return total_price
     
     
+
 
