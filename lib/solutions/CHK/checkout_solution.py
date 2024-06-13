@@ -81,6 +81,3 @@ def checkout(skus: str) -> int:
     return total_price
     
     
-
-
-
