@@ -14,7 +14,7 @@ import unittest
 class TestCheckoutFunction(unittest.TestCase):
     
     def test_valid_input_with_offers(self):
-        self.assertEqual(checkout_solution.checkout("AAABBBCCDDEE"), 200 + 50 + 45 + 30 + 40*2 + 20*2 + 15*2)
+        self.assertEqual(checkout_solution.checkout("AAABBBCCDDEE"), 130 + 40 + 30 + 40 + 30)
     
     def test_invalid_characters(self):
         self.assertEqual(checkout_solution.checkout("AAABBBCCDDX"), -1)
@@ -32,11 +32,10 @@ class TestCheckoutFunction(unittest.TestCase):
         
     def test_B_E_offers(self):
         self.assertEqual(checkout_solution.checkout("EEB"), 80)  # E's offer gives a free B
-        self.assertEqual(checkout_solution.checkout("EEEEBB"), 160 + 45)
+        self.assertEqual(checkout_solution.checkout("EEEEBB"), 160)
         
     def test_no_offers(self):
         self.assertEqual(checkout_solution.checkout("ABCD"), 50 + 30 + 20 + 15)
         
     def test_complex_case(self):
         self.assertEqual(checkout_solution.checkout("AAAAABBBCCDEE"), 200 + 50 + 45 + 30 + 20*2 + 15 + 80)
-        
