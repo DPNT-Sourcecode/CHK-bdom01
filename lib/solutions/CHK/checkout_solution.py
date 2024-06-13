@@ -27,7 +27,7 @@ def checkout(skus: str) -> int:
             results = re.findall(pattern, special_offers)
             print("The results are", results)
             offer_1_items, offer_1_cost = [int(i) for i in results[0]]
-            offer_2_items, offer_2_cost = [int(i) for i in results[0]]
+            offer_2_items, offer_2_cost = [int(i) for i in results[1]]
             item_count = count_items[item]
             high_offer = item_count // offer_2_items
             low_offer = (item_count % offer_2_items) // offer_1_items
@@ -87,5 +87,6 @@ def checkout(skus: str) -> int:
     return total_price
     
     
+
 
 
