@@ -38,5 +38,5 @@ class TestCheckoutFunction(unittest.TestCase):
         self.assertEqual(checkout_solution.checkout("ABCD"), 50 + 30 + 20 + 15)
         
     def test_complex_case(self):
-        self.assertEqual(checkout_solution.checkout("AAAAABBBCCDEE"), 200 + 50 + 45 + 30 + 20*2 + 15 + 80)
+        self.assertEqual(checkout_solution.checkout("AAAAABBBCCDEE"), 200 + 40 + 15 + 80 + 45)
 
