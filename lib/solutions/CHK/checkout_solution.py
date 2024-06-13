@@ -8,7 +8,7 @@ def checkout(skus: str) -> int:
     count_items = Counter(skus)
     item_names = count_items.keys()
     for i in item_names:
-        if i not in ("A", "B", "C", "D", "E"):
+        if i not in ("A", "B", "C", "D", "E", "F"):
             return -1
 
     total_price = 0
@@ -29,6 +29,14 @@ def checkout(skus: str) -> int:
             total_price += 15 * count_items["D"]
             
         elif item == "F":
+            
+            # set of every 3 under off
+            f_offer = count_items["F"] // 3
+            
+            # however many not in three not under offer
+            f_nooffer = count_items["F"] % 3
+            total_price += f_nooffer * 10
+            total_price += f_offer * 10 * (2/3)
             
     
     B = count_items["B"]
@@ -72,4 +80,5 @@ def checkout(skus: str) -> int:
     return total_price
     
     
+
 
