@@ -80,7 +80,7 @@ def checkout(skus: str) -> int:
     E = count_items["E"]
     
     # e first:
-    def e_first(B, E):
+    def calc_e_first(B, E):
         price = 0
         free_bs = E // 2
         paid_bs = B - free_bs
@@ -91,7 +91,7 @@ def checkout(skus: str) -> int:
         price += normal_bs * 30
         return price
     
-    def b_first(B, E):
+    def calc_b_first(B, E):
         price = 0
         offer_bs = B // 2
         normal_bs = B % 2
@@ -104,15 +104,16 @@ def checkout(skus: str) -> int:
         price += offer_bs * 25
         price += paid_bs * 30
         return price
-        
-       
-        
-        elif item == "B":    
-            offers_price = (count_items["B"] // 2) * 45
-            no_offers_price = (count_items["B"] % 2) * 30
-            total_price += offers_price
-            total_price += no_offers_price
+    
+    e_first = calc_e_first(B, E)
+    b_first = calc_b_first(B, E)
+    
+    if e_first > b_first:
+        total_price += b_first
+    else:
+        total_price += e_first
             
     return total_price
     
     
+
