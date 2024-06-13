@@ -2,6 +2,9 @@ from collections import Counter
 
 def checkout(skus: str) -> int:
     
+    
+    
+    
     if not isinstance(skus, str):
         return -1
     
@@ -10,6 +13,8 @@ def checkout(skus: str) -> int:
     for i in item_names:
         if i not in ("A", "B", "C", "D", "E", "F"):
             return -1
+
+
 
     total_price = 0
     for item in ("A", "C", "D", "F"):
