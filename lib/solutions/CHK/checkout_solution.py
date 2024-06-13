@@ -1,24 +1,18 @@
 from collections import Counter
-import pandas as pd
-
 
 def checkout(skus: str) -> int:
     
-    df = pd.read_csv(r"lib\solutions\CHK\offers.csv")
-    
-    
-    
     if not isinstance(skus, str):
         return -1
-    items = df["item"]
+    
     count_items = Counter(skus)
     item_names = count_items.keys()
     for i in item_names:
-        if i not in items:
+        if i not in ("A", "B", "C", "D", "E", "F"):
             return -1
 
 
-
+    
     total_price = 0
     for item in ("A", "C", "D", "F"):
         if item=="A":
@@ -89,4 +83,3 @@ def checkout(skus: str) -> int:
     return total_price
     
     
-
