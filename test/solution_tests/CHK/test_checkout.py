@@ -39,4 +39,7 @@ class TestCheckoutFunction(unittest.TestCase):
         
     def test_complex_case(self):
         self.assertEqual(checkout_solution.checkout("AAAAABBBCCDEE"), 200 + 40 + 15 + 80 + 45)
+        
+    def test_2Es_case(self):
+        self.assertEqual(checkout_solution.checkout("EE"), 80)
 
