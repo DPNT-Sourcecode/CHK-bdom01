@@ -25,6 +25,7 @@ def checkout(skus: str) -> int:
         elif special_offers.find("for")>=-1:
             pattern = r'(\d+)[A-Z] for (\d+)'
             results = re.findall(pattern, special_offers)
+            print("The results are", results)
             offer_1_items, offer_1_cost = [int(i) for i in results[0]]
             offer_2_items, offer_2_cost = [int(i) for i in results[0]]
             item_count = count_items[item]
@@ -86,4 +87,5 @@ def checkout(skus: str) -> int:
     return total_price
     
     
+
 
