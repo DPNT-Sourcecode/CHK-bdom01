@@ -1,7 +1,11 @@
 from collections import Counter
 from .offers import offers
+import re
 
 def checkout(skus: str) -> int:
+    
+    
+    
     
     if not isinstance(skus, str):
         return -1
@@ -9,11 +13,41 @@ def checkout(skus: str) -> int:
     count_items = Counter(skus)
     item_names = count_items.keys()
     for i in item_names:
-        if i not in ("A", "B", "C", "D", "E", "F"):
+        if i not in offers.keys():
             return -1
-        
-offers = 
 
+    total_price = 0
+    for item in sorted(offers.keys(), reverse=True):
+        price = offers[item]["Price"]
+        special_offers = offers[item]["Special offers"]
+        if special_offers == "":
+            total_price += count_items[item] * price
+        elif special_offers.find("for")>=-1:
+            pattern = r'(\d+)[A-Z] for (\d+)'
+            results = re.findall(pattern, special_offers)
+            offer_1_items, offer_1_cost = [int(i) for i in results[0]]
+            offer_2_items, offer_2_cost = [int(i) for i in results[0]]
+            
+            item_count = count_items[item]
+            high_offer = item_count // offer_2_items
+            low_offer = (item_count % offer_2_items) // offer_1_items
+            nooffer = item_count - high_offer * 5 - low_offer * 3
+            total_price += high_offer * 200
+            total_price += low_offer * 130
+            total_price += nooffer * 50
+            
+            
+            
+        elif special_offers.find("free")>=-1:  
+                            
+            
+            
+        
+        
+        
+        
+        
+    
     
     total_price = 0
     for item in ("A", "C", "D", "F"):
