@@ -4,86 +4,59 @@ import re
 
 def checkout(skus: str) -> int:
     
-    
+    price_table = {
+        'A': {'price': 50, 'offers': [(5, 200), (3, 130)]},
+        'B': {'price': 30, 'offers': [(2, 45)]},
+        'C': {'price': 20, 'offers': []},
+        'D': {'price': 15, 'offers': []},
+        'E': {'price': 40, 'offers': []},
+        'F': {'price': 10, 'offers': []},
+        'G': {'price': 20, 'offers': []},
+        'H': {'price': 10, 'offers': [(10, 80), (5, 45)]},
+        'I': {'price': 35, 'offers': []},
+        'J': {'price': 60, 'offers': []},
+        'K': {'price': 80, 'offers': [(2, 150)]},
+        'L': {'price': 90, 'offers': []},
+        'M': {'price': 15, 'offers': []},
+        'N': {'price': 40, 'offers': []},
+        'O': {'price': 10, 'offers': []},
+        'P': {'price': 50, 'offers': [(5, 200)]},
+        'Q': {'price': 30, 'offers': [(3, 80)]},
+        'R': {'price': 50, 'offers': []},
+        'S': {'price': 30, 'offers': []},
+        'T': {'price': 20, 'offers': []},
+        'U': {'price': 40, 'offers': []},
+        'V': {'price': 50, 'offers': [(3, 130), (2, 90)]},
+        'W': {'price': 20, 'offers': []},
+        'X': {'price': 90, 'offers': []},
+        'Y': {'price': 10, 'offers': []},
+        'Z': {'price': 50, 'offers': []}
+    }
     
     
     if not isinstance(skus, str):
         return -1
     
-    count_items = Counter(skus)
-    item_names = count_items.keys()
-    for i in item_names:
-        if i not in offers.keys():
-            return -1
-
+    # Count the occurrence of each item
+    item_counts = Counter(skus)
+    
     total_price = 0
-    for item in sorted(offers.keys(), reverse=True):
-        price = offers[item]["Price"]
-        special_offers = offers[item]["Special offers"]
-        if special_offers == "":
-            total_price += count_items[item] * price
-        elif special_offers.find("for")>=-1:
-            pattern = r'(\d+)[A-Z] for (\d+)'
-            results = re.findall(pattern, special_offers)
-            print("The results are", results)
-            offer_1_items, offer_1_cost = [int(i) for i in results[0]]
-            offer_2_items, offer_2_cost = [int(i) for i in results[1]]
-            item_count = count_items[item]
-            high_offer = item_count // offer_2_items
-            low_offer = (item_count % offer_2_items) // offer_1_items
-            nooffer = item_count - high_offer * offer_2_items - low_offer * offer_1_items
-            total_price += high_offer * offer_2_cost
-            total_price += low_offer * offer_1_cost
-            total_price += nooffer * price
-        elif special_offers.find("free")>=-1:  
-            if item == "F":
-                # set of every 3 under off
-                f_offer = count_items["F"] // 3
-                # however many not in three not under offer
-                f_nooffer = count_items["F"] % 3
-                total_price += f_nooffer * 10
-                print(f_offer)
-                total_price += f_offer * 10 * 2
+
+    # Calculate the price for each item considering the offers
+    for item, count in item_counts.items():
+        if item in price_table:
+            item_price = price_table[item]['price']
+            offers = sorted(price_table[item]['offers'], reverse=True, key=lambda x: x[1])  # Sort offers by savings
             
+            for offer in offers:
+                offer_count, offer_price = offer
+                if count >= offer_count:
+                    num_offers = count // offer_count
+                    total_price += num_offers * offer_price
+                    count -= num_offers * offer_count
+
+            total_price += count * item_price
     
-    B = count_items["B"]
-    E = count_items["E"]
-    
-    def calc_e_first(B, E):
-        price = 0
-        free_bs = E // 2
-        paid_bs = B - free_bs
-        if paid_bs < 0:
-            paid_bs=0
-        offer_bs = paid_bs // 2
-        normal_bs = paid_bs % 2
-        price += 40 * E
-        price += offer_bs * 45
-        price += normal_bs * 30
-        return price
-    
-    def calc_b_first(B, E):
-        price = 0
-        offer_bs = B // 2
-        normal_bs = B % 2
-        potential_free_bs = E // 2
-        paid_bs = normal_bs - potential_free_bs
-        if paid_bs <0:
-            paid_bs=0
-        
-        price += 40 * E
-        price += offer_bs * 45
-        price += paid_bs * 30
-        return price
-    
-    e_first = calc_e_first(B, E)
-    b_first = calc_b_first(B, E)
-    
-    if e_first > b_first:
-        total_price += b_first
-    else:
-        total_price += e_first
-            
     return total_price
     
     
