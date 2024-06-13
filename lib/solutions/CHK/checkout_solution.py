@@ -59,8 +59,8 @@ def checkout(skus: str) -> int:
         if item=="A":
             A = count_items["A"]
             A_5_offer = A // 5
-            A_3_offer = (A % 5) % 3
-            A_nooffer = (A % 5) + A_3_offer
+            A_3_offer = (A % 5) // 3
+            A_nooffer = (A % 5) + (A % 5) % 3
             print(A_5_offer, A_3_offer, A_nooffer)
             total_price += A_5_offer * 200
             total_price += A_3_offer * 130
