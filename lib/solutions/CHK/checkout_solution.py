@@ -89,7 +89,7 @@ def checkout(skus: str) -> int:
         offer_bs = paid_bs // 2
         normal_bs = paid_bs % 2
         price += 40 * E
-        price += offer_bs * 25
+        price += offer_bs * 45
         price += normal_bs * 30
         print("n, o, f, p")
         print(normal_bs, offer_bs, free_bs, paid_bs)
@@ -106,7 +106,7 @@ def checkout(skus: str) -> int:
             paid_bs=0
         
         price += 40 * E
-        price += offer_bs * 25
+        price += offer_bs * 45
         price += paid_bs * 30
         print("b first price", price)
         return price
@@ -122,5 +122,6 @@ def checkout(skus: str) -> int:
     return total_price
     
     
+
 
 
