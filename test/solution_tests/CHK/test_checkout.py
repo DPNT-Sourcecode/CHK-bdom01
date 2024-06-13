@@ -12,7 +12,7 @@ import unittest
 #         self.assertEqual(checkout_solution.checkout(None), -1)
         
 class TestCheckoutFunction(unittest.TestCase):
-    # 130, 40, 30, 40, 45 = 285
+    # 130 A, 40 C, 30 D, 80, 45B, 30B = 255
     def test_valid_input_with_offers(self):
         self.assertEqual(checkout_solution.checkout("AAABBBCCDDEE"), 130 + 40 + 30 + 40 + 30)
     
