@@ -25,3 +25,6 @@ class TestSum(unittest.TestCase):
         
     def test_only_offers(self):
         self.assertEqual(checkout_solution.checkout("AAAABB"), 130 + 50 + 45)
+        
+    def test_none_input(self):
+        self.assertEqual(checkout_solution.checkout(None), -1)
