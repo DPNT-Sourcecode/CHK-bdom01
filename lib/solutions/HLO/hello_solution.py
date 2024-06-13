@@ -12,4 +12,3 @@ def hello(friend_name: str) -> str:
     #     raise ValueError(f"Expected 'Hello World!'")
     
     return f"Hello, {friend_name}!"
-
