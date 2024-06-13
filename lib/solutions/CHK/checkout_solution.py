@@ -3,61 +3,74 @@ from .offers import offers
 import re
 
 def checkout(skus: str) -> int:
-    
-    price_table = {
-        'A': {'price': 50, 'offers': [(5, 200), (3, 130)]},
-        'B': {'price': 30, 'offers': [(2, 45)]},
-        'C': {'price': 20, 'offers': []},
-        'D': {'price': 15, 'offers': []},
-        'E': {'price': 40, 'offers': []},
-        'F': {'price': 10, 'offers': []},
-        'G': {'price': 20, 'offers': []},
-        'H': {'price': 10, 'offers': [(10, 80), (5, 45)]},
-        'I': {'price': 35, 'offers': []},
-        'J': {'price': 60, 'offers': []},
-        'K': {'price': 80, 'offers': [(2, 150)]},
-        'L': {'price': 90, 'offers': []},
-        'M': {'price': 15, 'offers': []},
-        'N': {'price': 40, 'offers': []},
-        'O': {'price': 10, 'offers': []},
-        'P': {'price': 50, 'offers': [(5, 200)]},
-        'Q': {'price': 30, 'offers': [(3, 80)]},
-        'R': {'price': 50, 'offers': []},
-        'S': {'price': 30, 'offers': []},
-        'T': {'price': 20, 'offers': []},
-        'U': {'price': 40, 'offers': []},
-        'V': {'price': 50, 'offers': [(3, 130), (2, 90)]},
-        'W': {'price': 20, 'offers': []},
-        'X': {'price': 90, 'offers': []},
-        'Y': {'price': 10, 'offers': []},
-        'Z': {'price': 50, 'offers': []}
-    }
-    
-    
     if not isinstance(skus, str):
         return -1
-    
-    # Count the occurrence of each item
+
+    # Define prices and special offers
+    prices = {
+        'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40, 'F': 10, 'G': 20, 'H': 10, 'I': 35, 'J': 60,
+        'K': 80, 'L': 90, 'M': 15, 'N': 40, 'O': 10, 'P': 50, 'Q': 30, 'R': 50, 'S': 30, 'T': 20,
+        'U': 40, 'V': 50, 'W': 20, 'X': 90, 'Y': 10, 'Z': 50
+    }
+
+    offers = {
+        'A': [(5, 200), (3, 130)],
+        'B': [(2, 45)],
+        'E': [(2, 80)],  # buy 2E, get one B free
+        'F': [(3, 20)],  # buy 2F, get one F free
+        'H': [(10, 80), (5, 45)],
+        'K': [(2, 150)],
+        'N': [(3, 120)],  # buy 3N, get one M free
+        'P': [(5, 200)],
+        'Q': [(3, 80)],
+        'R': [(3, 150)],  # buy 3R, get one Q free
+        'U': [(4, 120)],  # buy 3U, get one U free
+        'V': [(3, 130), (2, 90)],
+    }
+
+    # Count occurrences of each SKU
+    from collections import Counter
     item_counts = Counter(skus)
-    
-    total_price = 0
 
-    # Calculate the price for each item considering the offers
+    # Check for invalid items
+    for item in item_counts:
+        if item not in prices:
+            return -1
+
+    # Calculate total price
+    total = 0
+
+    # Apply special offers where possible
     for item, count in item_counts.items():
-        if item in price_table:
-            item_price = price_table[item]['price']
-            offers = sorted(price_table[item]['offers'], reverse=True, key=lambda x: x[1])  # Sort offers by savings
-            
-            for offer in offers:
-                offer_count, offer_price = offer
-                if count >= offer_count:
-                    num_offers = count // offer_count
-                    total_price += num_offers * offer_price
-                    count -= num_offers * offer_count
+        if item in offers:
+            item_total = 0
+            for offer in sorted(offers[item], key=lambda x: -x[0]):  # Sort offers by quantity descending
+                while count >= offer[0]:
+                    item_total += offer[1]
+                    count -= offer[0]
+            item_total += count * prices[item]  # Add the remaining items at regular price
+            total += item_total
+        else:
+            total += count * prices[item]
 
-            total_price += count * item_price
+    # Apply dependent offers like E and N separately
+    if 'E' in item_counts and 'B' in item_counts:
+        free_bs = item_counts['E'] // 2
+        item_counts['B'] = max(0, item_counts['B'] - free_bs)
     
-    return total_price
+    if 'N' in item_counts and 'M' in item_counts:
+        free_ms = item_counts['N'] // 3
+        item_counts['M'] = max(0, item_counts['M'] - free_ms)
+    
+    if 'R' in item_counts and 'Q' in item_counts:
+        free_qs = item_counts['R'] // 3
+        item_counts['Q'] = max(0, item_counts['Q'] - free_qs)
+
+    # Recalculate total price for dependent offers
+    for item, count in item_counts.items():
+        total += count * prices[item]
+
+    return total
     
     
 
