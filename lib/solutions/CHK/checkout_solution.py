@@ -37,7 +37,10 @@ from collections import Counter
 #     return total_price
 
 
-
+# logic:
+    # do A offers
+    # do E offers 
+    # do rest
 
 def checkout(skus):
     
@@ -48,11 +51,11 @@ def checkout(skus):
     count_items = Counter(skus)
     item_names = count_items.keys()
     for i in item_names:
-        if i not in ("A", "B", "C", "D"):
+        if i not in ("A", "B", "C", "D", "E"):
             return -1
-    
+
     total_price = 0
-    for item in ("A", "B", "C", "D"):
+    for item in ("A", "B", "C", "D", "E"):
         if item=="A":
             offers_price = (count_items["A"] // 3) * 130
             no_offers_price = (count_items["A"] % 3) * 50
@@ -74,3 +77,4 @@ def checkout(skus):
     return total_price
     
     
+
