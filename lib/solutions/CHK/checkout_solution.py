@@ -2,7 +2,13 @@ from collections import Counter
 
 def checkout(skus: str) -> int:
     
+    with open('example.txt', 'r') as file:
+        for line in file:
+            print(line.strip()) 
+    letters = [chr(i).upper() for i in range(97, 123)]
     
+    get_one_free_letters = "EFNRU"
+    mutil_item_offers = "ABHKPQ"
     
     
     if not isinstance(skus, str):
@@ -11,7 +17,7 @@ def checkout(skus: str) -> int:
     count_items = Counter(skus)
     item_names = count_items.keys()
     for i in item_names:
-        if i not in ("A", "B", "C", "D", "E", "F"):
+        if i not in letters:
             return -1
 
 
@@ -86,3 +92,4 @@ def checkout(skus: str) -> int:
     return total_price
     
     
+
