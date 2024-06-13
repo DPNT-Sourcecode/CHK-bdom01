@@ -12,7 +12,7 @@ def checkout(skus: str) -> int:
             return -1
 
     total_price = 0
-    for item in ("A", "C", "D"):
+    for item in ("A", "C", "D", "F"):
         if item=="A":
             A = count_items["A"]
             A_5_offer = A // 5
@@ -27,6 +27,9 @@ def checkout(skus: str) -> int:
             
         elif item == "D":
             total_price += 15 * count_items["D"]
+            
+        elif item == "F":
+            
     
     B = count_items["B"]
     E = count_items["E"]
@@ -69,3 +72,4 @@ def checkout(skus: str) -> int:
     return total_price
     
     
+
