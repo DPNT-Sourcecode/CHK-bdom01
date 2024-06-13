@@ -60,7 +60,7 @@ def checkout(skus: str) -> int:
             A = count_items["A"]
             A_5_offer = A // 5
             A_3_offer = (A % 5) // 3
-            A_nooffer = A - A_5_offer - A_3_offer
+            A_nooffer = A - A % 5 - A % 3
             total_price += A_5_offer * 200
             total_price += A_3_offer * 130
             total_price += A_nooffer * 50
@@ -116,4 +116,3 @@ def checkout(skus: str) -> int:
     return total_price
     
     
-
