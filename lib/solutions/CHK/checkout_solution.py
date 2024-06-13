@@ -2,9 +2,13 @@ from collections import Counter
 
 def checkout(skus: str) -> int:
     
-    with open('example.txt', 'r') as file:
-        for line in file:
-            print(line.strip()) 
+    with open("lib\solutions\CHK\offers.txt", 'r') as file:
+        for i, line in enumerate(file):
+            
+            print(i, line.strip()) 
+            
+            
+    
     letters = [chr(i).upper() for i in range(97, 123)]
     
     get_one_free_letters = "EFNRU"
