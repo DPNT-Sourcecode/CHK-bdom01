@@ -28,7 +28,7 @@ class TestCheckoutFunction(unittest.TestCase):
     def test_A_offers(self):
         self.assertEqual(checkout_solution.checkout("AAAAA"), 200)
         self.assertEqual(checkout_solution.checkout("AAAAAA"), 200 + 50)
-        self.assertEqual(checkout_solution.checkout("AAAAAAA"), 200 + 130)
+        self.assertEqual(checkout_solution.checkout("AAAAAAA"), 200 + 100)
         
     def test_B_E_offers(self):
         self.assertEqual(checkout_solution.checkout("EEB"), 80)  # E's offer gives a free B
